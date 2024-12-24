@@ -1,11 +1,11 @@
+import { mockInNode } from '@__tests__/mock-api/mock-in-node';
 import { beforeAll, afterEach, afterAll } from 'vitest';
-import { server } from '@__tests__/mock-api';
 
 const main = () => {
   if (process.env.MOCK === 'true') {
-    beforeAll(() => server.listen());
-    afterEach(() => server.resetHandlers());
-    afterAll(() => server.close());
+    beforeAll(() => mockInNode.listen());
+    afterEach(() => mockInNode.resetHandlers());
+    afterAll(() => mockInNode.close());
   }
 };
 

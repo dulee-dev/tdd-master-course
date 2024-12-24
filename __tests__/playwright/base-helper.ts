@@ -9,7 +9,7 @@ export class BaseHelper {
   constructor(page: Page, context: BrowserContext) {
     this.page = page;
     this.context = context;
-    this.baseUrl = process.env.WEB_BASE_URL;
+    this.baseUrl = process.env.NEXT_PUBLIC_WEB_BASE_URL;
   }
 
   async signIn(nickname: string): Promise<void> {

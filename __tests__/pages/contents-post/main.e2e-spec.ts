@@ -1,8 +1,8 @@
-import { test, expect } from '@playwright/test';
 import { Helper } from './helper';
 import { authTest } from '@__tests__/playwright/auth-test';
 import { faker } from '@faker-js/faker';
 import { uuidRegConcat } from '@/libs/string-sub';
+import { test, expect } from '@__tests__/playwright/http-interceptor';
 
 const url = '/contents/post';
 
