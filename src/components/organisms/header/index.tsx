@@ -11,7 +11,7 @@ import { layoutMx } from '@/styles/layout.styles';
 
 interface Props {
   className?: string;
-  userNickname?: string;
+  user?: { nickname: string };
 }
 
 export const Header = (props: Props) => {
@@ -19,7 +19,6 @@ export const Header = (props: Props) => {
     <header
       className={clsx(
         layoutMx,
-        // 'flex items-center justify-between h-16 border-b-fuchsia-600 border-b-2',
         'flex items-center justify-between h-16',
         props.className
       )}
@@ -41,14 +40,17 @@ export const Header = (props: Props) => {
         <Link href="/search" className="mr-2 p-2">
           <HiSearch className="text-2xl" />
         </Link>
-        {true ? (
-          <button className="flex items-center p-2">
+        {props.user ? (
+          <button
+            aria-label="user-dropdown-menu"
+            className="flex items-center p-2"
+          >
             <HiOutlineUser className="text-2xl " />
             <HiChevronDown />
           </button>
         ) : (
           <Link
-            href="/search"
+            href="/users/sign-in"
             className="mr-2 px-4  py-2 rounded-l-full rounded-r-full bg-neutral-800"
           >
             로그인

@@ -1,65 +1,9 @@
 {
   "vitest.rootConfig": "vitest.config.ts",
-  "material-icon-theme.files.associations": {
-    "*.rule-spec.ts": "Test-ts",
-    "*.service-spec.ts": "Test-ts",
-    "*.unit-spec.ts": "Test-ts",
-    "*.infra-spec.ts": "Test-ts",
-    "*.controller-module.ts": "Nest-controller",
-    "*.effect.ts": "typescript-effect",
-    "*.pure.ts": "typescript-pure",
-    "pures.ts": "typescript-pure",
-    "*.constant.ts": "typescript-constant",
-    "constants.ts": "typescript-constant",
-    "*.type.ts": "typescript-type",
-    "types.ts": "typescript-type",
-    "*.entity.ts": "typescript-entity",
-    "*.effect-spec.ts": "test-effect",
-    "*.pure-spec.ts": "test-pure",
-    "*.constant-spec.ts": "test-constant",
-    "*.type-spec.ts": "test-type"
-  },
   "todo.colors.comment": "#FFDD87", // Comment color
   "todo.colors.tags.background": ["#e54545", "#e59f45", "#e5d145", "#ae81ff"], // Special tags' background colors
   "todo.colors.tags.foreground": ["#000000", "#000000", "#000000", "#000000"], // Special tags' foreground colors
   "todo.tags.names": ["must", "should", "could", "won't"], // Special tags' names
   "todo.file.name": "note/TODO",
-  "todo.file.defaultContent": "Task:\n  ☐ 전체\n  ☐ 요구사항 분석(문제 상황, 목표 등)\n\n  ☐ 개발 전략(테스트 시나리오, 우선순위 - 후순위로 미룰게 있나?, 작업 목록 작성) \n\n  ☐ 작업 목록: @must @could @should @won't\n\n  ☐ 회고\n\n  ☐ 추가",
-  "material-icon-theme.files.customClones": [
-    {
-      "name": "typescript-effect",
-      "base": "typescript",
-      "color": "yellow-700"
-    },
-    {
-      "name": "typescript-pure",
-      "base": "typescript",
-      "color": "green-500"
-    },
-    {
-      "name": "typescript-constant",
-      "base": "typescript",
-      "color": "gray-600"
-    },
-    {
-      "name": "typescript-type",
-      "base": "typescript",
-      "color": "gray-400"
-    },
-    {
-      "name": "typescript-entity",
-      "base": "typescript",
-      "color": "gray-100"
-    },
-    {
-      "name": "test-effect",
-      "base": "test-ts",
-      "color": "yellow-700"
-    },
-    {
-      "name": "test-pure",
-      "base": "test-ts",
-      "color": "green-500"
-    }
-  ]
+  "todo.file.defaultContent": "Task:\n  ☐ 전체\n  ☐ 요구사항 분석(문제 상황, 목표 등)\n\n  ☐ 개발 전략(테스트 시나리오, 우선순위 - 후순위로 미룰게 있나?, 작업 목록 작성) \n\n  ☐ 작업 목록: @must @could @should @won't\n\n  ☐ 회고\n\n  ☐ 추가"
 }
