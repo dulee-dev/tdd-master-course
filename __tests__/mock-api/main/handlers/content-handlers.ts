@@ -13,8 +13,6 @@ export const contentHandlers = [
   http.post(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/contents`,
     async ({ request }) => {
-      // Read the intercepted request body as JSON.
-
       const auth = request.headers.get('authorization');
       if (!auth)
         return HttpResponse.json({

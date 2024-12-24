@@ -12,7 +12,6 @@ export const createContent = async (
   if (!auth) return undefined;
 
   const response = await contentApi.createOne(proto, auth);
-  console.log(response);
 
   if (response.status !== 201) return undefined;
 

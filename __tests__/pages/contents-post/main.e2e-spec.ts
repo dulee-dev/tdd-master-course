@@ -2,7 +2,7 @@ import { Helper } from './helper';
 import { authTest } from '@__tests__/playwright/auth-test';
 import { faker } from '@faker-js/faker';
 import { uuidRegConcat } from '@/libs/string-sub';
-import { test, expect } from '@__tests__/playwright/http-interceptor';
+import { test, expect } from '@playwright/test';
 
 const url = '/contents/post';
 
@@ -58,7 +58,7 @@ test.describe('content-post-main', () => {
     await helper.getSubmitBtn.click();
 
     const regexp = new RegExp(
-      `^${helper.baseUrl}/contents/${uuidRegConcat}$`,
+      `^${helper.baseUrl}/contents/${uuidRegConcat.source}$`,
       'i'
     );
     await expect(page).toHaveURL(regexp);

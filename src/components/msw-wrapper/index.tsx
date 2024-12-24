@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { mock } from './tempt';
+import { mockBrowser } from './mock-browser';
 
 interface Props {
   className?: string;
@@ -12,9 +12,7 @@ export const MswWrapper = (props: Props) => {
 
   useEffect(() => {
     const init = async () => {
-      await mock();
-      console.log('init');
-
+      await mockBrowser();
       setEnableMSW(true);
     };
     if (!enableMSW) {

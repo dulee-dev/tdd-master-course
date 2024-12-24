@@ -5,7 +5,9 @@ export const authTest = {
     test('if not sign-in, "로그인" link is visible', async ({ page }) => {
       await page.goto(url);
       await page.getByRole('link', { name: '로그인' }).click();
-      await expect(page).toHaveURL('http://localhost:3000/users/sign-in');
+      await expect(page).toHaveURL(
+        `${process.env.NEXT_PUBLIC_WEB_BASE_URL}/users/sign-in`
+      );
     });
 
     test('if sign-in, "user dropdown" button is visible', async ({
@@ -16,7 +18,7 @@ export const authTest = {
         {
           name: 'authorization',
           value: '두리',
-          url: 'http://localhost:3000',
+          url: process.env.NEXT_PUBLIC_WEB_BASE_URL,
         },
       ]);
 
@@ -29,7 +31,9 @@ export const authTest = {
   private(url: string) {
     test('if not sign-in, redirect to sign-in page', async ({ page }) => {
       await page.goto(url);
-      await expect(page).toHaveURL('http://localhost:3000/users/sign-in');
+      await expect(page).toHaveURL(
+        `${process.env.NEXT_PUBLIC_WEB_BASE_URL}/users/sign-in`
+      );
     });
 
     test('if sign-in, "user dropdown" button is visible', async ({
@@ -40,7 +44,7 @@ export const authTest = {
         {
           name: 'authorization',
           value: '두리',
-          url: 'http://localhost:3000',
+          url: process.env.NEXT_PUBLIC_WEB_BASE_URL,
         },
       ]);
 
