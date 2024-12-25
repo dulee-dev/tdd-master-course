@@ -11,4 +11,4 @@ const main = (len: number) => {
   console.log(sample);
 };
 
-main(13);
+main(1);

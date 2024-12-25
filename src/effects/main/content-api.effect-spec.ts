@@ -61,4 +61,27 @@ describe('content-api', () => {
     expect(data).toHaveProperty('content', expect.objectContaining(body));
     expect(data.status).toEqual(201);
   });
+
+  test('update one', async () => {
+    const content = contentFixtures[0];
+    const user = userFixtures[0];
+    const body = {
+      title: 'new title',
+      thumbnail: 'new thumbnail',
+      body: 'new body',
+    };
+    const data = await contentApi.updateOne(body, user.nickname, content.id);
+
+    expect(data).toHaveProperty('content.id', content.id);
+    expect(data).toHaveProperty('content', expect.objectContaining(body));
+    expect(data.status).toEqual(200);
+  });
+
+  test('delete one', async () => {
+    const content = contentFixtures[0];
+    const user = userFixtures[0];
+
+    const data = await contentApi.removeOne(user.nickname, content.id);
+    expect(data.status).toEqual(200);
+  });
 });

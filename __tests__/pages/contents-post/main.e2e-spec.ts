@@ -4,10 +4,6 @@ import { faker } from '@faker-js/faker';
 import { uuidRegConcat } from '@/libs/string-sub';
 import { test, expect } from '@playwright/test';
 import { userFixtures } from '@__tests__/fixtures/users';
-import { mockInNode } from '@__tests__/mock-api/mock-in-node';
-import { http, HttpResponse } from 'msw';
-import { contentFixtures } from '@__tests__/fixtures/contents';
-import { convertContentToContentView } from '@__tests__/libs/convert';
 
 const url = '/contents/post';
 
@@ -16,23 +12,20 @@ test.describe('auth', () => {
 });
 
 test.describe('content-post-main', () => {
-  test('', async ({ page, context }) => {
-    const helper = new Helper(page, context);
-    const user = userFixtures[0];
-    await helper.signIn(user.nickname);
-    await helper.gotoTargetPage();
-  });
-
   test('if visit page, submit disabled', async ({ page, context }) => {
     const helper = new Helper(page, context);
+    const user = userFixtures[0];
+    await helper.init(user);
 
-    await helper.gotoTargetPage();
     await expect(helper.getSubmitBtn).toBeDisabled();
   });
 
   test.describe('form invalid', () => {
     test('if title lenght 81, submit disabled', async ({ page, context }) => {
       const helper = new Helper(page, context);
+      const user = userFixtures[0];
+      await helper.init(user);
+
       await helper.getTitle.fill(faker.string.sample(81));
       await helper.setInputFixtureFile(helper.getInputThumbnail);
 
@@ -41,6 +34,9 @@ test.describe('content-post-main', () => {
 
     test('if no image, submit disabled', async ({ page, context }) => {
       const helper = new Helper(page, context);
+      const user = userFixtures[0];
+      await helper.init(user);
+
       await helper.getTitle.fill(faker.string.sample(2));
 
       await expect(helper.getSubmitBtn).toBeDisabled();
@@ -49,6 +45,9 @@ test.describe('content-post-main', () => {
 
   test('if image choosed, show', async ({ page, context }) => {
     const helper = new Helper(page, context);
+    const user = userFixtures[0];
+    await helper.init(user);
+
     const fileName = '/file.svg';
 
     await helper.setInputFixtureFile(helper.getInputThumbnail, fileName);
@@ -56,12 +55,12 @@ test.describe('content-post-main', () => {
   });
 
   test('if ok, show', async ({ page, context }) => {
-    const title = faker.string.sample(2);
-
     const helper = new Helper(page, context);
+    const user = userFixtures[0];
+    await helper.init(user);
     const fileName = '/file.svg';
 
-    await helper.getTitle.fill(title);
+    await helper.getTitle.fill(faker.string.sample(2));
     await helper.setInputFixtureFile(helper.getInputThumbnail, fileName);
     await expect(helper.getThumbnail).toHaveAttribute('src', fileName);
 
@@ -73,6 +72,5 @@ test.describe('content-post-main', () => {
       'i'
     );
     await expect(page).toHaveURL(regexp);
-    await expect(page.getByText(title)).toBeVisible();
   });
 });

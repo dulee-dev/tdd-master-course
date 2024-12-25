@@ -8,13 +8,13 @@ import { redirect } from 'next/navigation';
 export default async function ContentsEdit({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
   const cookieStore = await cookies();
   const userNickname = cookieStore.get('authorization')?.value;
   if (!userNickname) redirect('/users/sign-in');
 
-  const { id } = params;
+  const { id } = await params;
   const response = await contentApi.findMyOne(id, userNickname);
   if (response.status !== 200) {
     redirect('/contents');

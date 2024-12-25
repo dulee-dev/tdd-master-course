@@ -6,10 +6,11 @@ import { middleDot } from '@/utils/string/constant';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { useTitleStatus } from './hooks/use-title-status';
 import { useFormStatus } from './hooks/use-form-status';
 import { useInputFile } from '@/hooks/use-input-file.hook';
-import { createContent } from './actions';
+import { updateContent } from './actions';
 import { ContentView } from '@/domains/content/type';
 import { localizeDate } from '@/libs/string-sub/localized';
 
@@ -20,6 +21,8 @@ interface Props {
 
 export const ContentEditForm = (props: Props) => {
   const router = useRouter();
+  const params = useParams<{ id: string }>();
+
   const { text: title, onInput: onInputTitle } = useContentEditable(
     props.content.title
   );
@@ -33,18 +36,21 @@ export const ContentEditForm = (props: Props) => {
     idle,
     onChange: onChangeFile,
   } = useInputFile(props.content.thumbnail, props.content.thumbnail);
-  const formStatus = useFormStatus([titleStatus, filePath !== undefined, idle]);
+  const formStatus = useFormStatus([titleStatus, idle]);
   const onClick = async () => {
     if (!filePath) {
       alert('file not selected');
       return;
     }
 
-    const result = await createContent({
-      title,
-      body,
-      thumbnail: filePath,
-    });
+    const result = await updateContent(
+      {
+        title,
+        body,
+        thumbnail: filePath,
+      },
+      params.id
+    );
 
     if (!result) {
       alert('create content failed');

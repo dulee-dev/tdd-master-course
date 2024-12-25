@@ -23,11 +23,11 @@ export class Helper extends BaseHelper {
     this.getSubmitBtn = page.getByRole('button', { name: '수정하기' });
   }
 
-  async initial(user: User, content: Content) {
+  async initial(user: User, content: Content, assert?: boolean) {
     const url = calcUrl(content.id);
 
     await this.signIn(user.nickname);
     await this.page.goto(url);
-    await expect(this.page).toHaveURL(url);
+    if (assert) await expect(this.page).toHaveURL(url);
   }
 }

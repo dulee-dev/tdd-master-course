@@ -4,6 +4,7 @@ import { BrowserContext, Locator, Page, expect } from '@playwright/test';
 export class Helper extends BaseHelper {
   readonly getMain: Locator;
   readonly getEditBtn: Locator;
+  readonly getDeleteBtn: Locator;
 
   readonly getAuthorAside: Locator;
 
@@ -13,6 +14,7 @@ export class Helper extends BaseHelper {
     super(page, context);
     this.getMain = page.getByRole('main');
     this.getEditBtn = page.getByRole('link', { name: '수정', exact: true });
+    this.getDeleteBtn = page.getByRole('button', { name: '삭제', exact: true });
     this.getAuthorAside = page.getByRole('complementary', { name: 'author' });
     this.getCommentTextarea = page.getByPlaceholder('댓글을 작성하세요');
   }

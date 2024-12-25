@@ -3,7 +3,7 @@ import { localizeDate } from '@/libs/string-sub/localized';
 import { layoutMx } from '@/styles/layout.styles';
 import { middleDot } from '@/utils/string/constant';
 import clsx from 'clsx';
-import Link from 'next/link';
+import { ContentDetailActionBtns } from '../content-detail-action-btns';
 
 interface Props {
   className?: string;
@@ -25,14 +25,7 @@ export const ContentDetailMain = (props: Props) => {
           {` `}
           <span>{localizeDate(props.content.createdAt)}</span>
         </div>
-        {props.auth && (
-          <div className="flex justify-end">
-            <Link href="/" className="mr-4">
-              수정
-            </Link>
-            <button>삭제</button>
-          </div>
-        )}
+        {props.auth && <ContentDetailActionBtns />}
       </header>
       <div>{props.content.body}</div>
     </main>

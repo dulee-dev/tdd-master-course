@@ -75,4 +75,42 @@ export const contentApi = {
     const json = await res.json();
     return json;
   },
+
+  async updateOne(
+    body: Omit<Content, 'id' | 'createdAt' | 'authorId'>,
+    authorization: string,
+    id: string
+  ): Promise<{ content: Content; status: 200 } | { status: 404 }> {
+    const res = await fetch(
+      process.env.NEXT_PUBLIC_API_BASE_URL + '/contents/' + id,
+      {
+        method: 'patch',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization,
+        },
+        body: JSON.stringify(body),
+      }
+    );
+    const json = await res.json();
+    return json;
+  },
+
+  async removeOne(
+    authorization: string,
+    id: string
+  ): Promise<{ status: 200 } | { status: 404 }> {
+    const res = await fetch(
+      process.env.NEXT_PUBLIC_API_BASE_URL + '/contents/' + id,
+      {
+        method: 'delete',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization,
+        },
+      }
+    );
+    const json = await res.json();
+    return json;
+  },
 };

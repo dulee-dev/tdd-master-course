@@ -96,12 +96,26 @@ test.describe('comment form', () => {
     const helper = new Helper(page, context);
     const content = contentFixtures[0];
     const user = userFixtures[0];
-
     const path = getPath(content.id);
 
     await helper.signIn(user.nickname);
     await page.goto(path);
     await helper.getCommentTextarea.click();
     await expect(page).not.toHaveURL('/users/sign-in');
+  });
+});
+
+test.describe('delete', () => {
+  test('success', async ({ page, context }) => {
+    const helper = new Helper(page, context);
+    const content = contentFixtures[0];
+    const user = userFixtures[0];
+    const path = getPath(content.id);
+
+    await helper.signIn(user.nickname);
+    await page.goto(path);
+    await helper.getDeleteBtn.click();
+
+    await expect(page.getByText('삭제 성공')).toBeVisible();
   });
 });

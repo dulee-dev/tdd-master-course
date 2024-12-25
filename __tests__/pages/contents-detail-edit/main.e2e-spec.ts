@@ -38,17 +38,13 @@ test('check initial load', async ({ page, context }) => {
 });
 
 test.describe('content-edit', () => {
-  test.beforeEach(async ({ page, context }) => {
-    const helper = new Helper(page, context);
-    const user = userFixtures[0];
-    const content = contentFixtures[0];
-
-    await helper.initial(user, content);
-  });
-
   test.describe('form invalid', () => {
     test('if title lenght 1, submit disabled', async ({ page, context }) => {
       const helper = new Helper(page, context);
+      const user = userFixtures[0];
+      const content = contentFixtures[0];
+
+      await helper.initial(user, content);
       await helper.getTitle.fill(faker.string.sample(1));
       await helper.setInputFixtureFile(helper.getInputThumbnail);
       await expect(helper.getSubmitBtn).toBeDisabled();
@@ -56,6 +52,10 @@ test.describe('content-edit', () => {
 
     test('if title lenght 81, submit disabled', async ({ page, context }) => {
       const helper = new Helper(page, context);
+      const user = userFixtures[0];
+      const content = contentFixtures[0];
+
+      await helper.initial(user, content);
       await helper.getTitle.fill(faker.string.sample(81));
       await helper.setInputFixtureFile(helper.getInputThumbnail);
       await expect(helper.getSubmitBtn).toBeDisabled();
@@ -64,6 +64,10 @@ test.describe('content-edit', () => {
 
   test('if image choosed, show', async ({ page, context }) => {
     const helper = new Helper(page, context);
+    const user = userFixtures[0];
+    const content = contentFixtures[0];
+
+    await helper.initial(user, content);
     const fileName = '/file.svg';
 
     await helper.setInputFixtureFile(helper.getInputThumbnail, fileName);
@@ -72,11 +76,14 @@ test.describe('content-edit', () => {
 
   test('if ok, show', async ({ page, context }) => {
     const helper = new Helper(page, context);
+    const user = userFixtures[0];
+    const content = contentFixtures[0];
+    const url = calcUrl(content.id);
 
-    await helper.getTitle.fill(faker.string.sample(2));
-    await helper.setInputFixtureFile(helper.getInputThumbnail);
+    await helper.signIn(user.nickname);
+    await page.goto(url);
+    await expect(page).toHaveURL(url);
 
-    // disabled면 클릭 안함
     await helper.getSubmitBtn.click();
 
     const regexp = new RegExp(

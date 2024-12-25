@@ -1,3 +1,4 @@
+import { User } from '@/domains/user/user.entity';
 import { BaseHelper } from '@__tests__/playwright/base-helper';
 import { BrowserContext, Locator, Page, expect } from '@playwright/test';
 
@@ -24,5 +25,10 @@ export class Helper extends BaseHelper {
   async gotoTargetPage() {
     await this.page.goto(this.url);
     await expect(this.page).toHaveURL(this.baseUrl + this.url);
+  }
+
+  async init(user: User) {
+    await this.signIn(user.nickname);
+    await this.gotoTargetPage();
   }
 }

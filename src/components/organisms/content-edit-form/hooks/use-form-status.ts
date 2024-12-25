@@ -1,16 +1,12 @@
 import { useEffect, useState } from 'react';
 
-export const useFormStatus = ([titleStatus, imgStatus, imgIdle]: [
-  boolean,
-  boolean,
-  boolean
-]) => {
+export const useFormStatus = ([titleStatus, imgIdle]: [boolean, boolean]) => {
   const [status, setStatus] = useState(false);
 
   useEffect(() => {
-    const ok = titleStatus && imgStatus && imgIdle;
+    const ok = titleStatus && imgIdle;
     setStatus(ok);
-  }, [titleStatus, imgStatus, imgIdle]);
+  }, [titleStatus, imgIdle]);
 
   return status;
 };

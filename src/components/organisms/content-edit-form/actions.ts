@@ -5,15 +5,16 @@ import { ContentPartial } from '@/domains/content/type';
 import { getAuthCookie } from '@/effects/main/auth-cookie-handler';
 import { contentApi } from '@/effects/main/content-api';
 
-export const createContent = async (
-  proto: ContentPartial
+export const updateContent = async (
+  proto: ContentPartial,
+  id: string
 ): Promise<Content | undefined> => {
   const auth = await getAuthCookie();
   if (!auth) return undefined;
 
-  const response = await contentApi.createOne(proto, auth);
+  const response = await contentApi.updateOne(proto, auth, id);
 
-  if (response.status !== 201) return undefined;
+  if (response.status !== 200) return undefined;
 
   return response.content;
 };
