@@ -29,9 +29,9 @@ export const Header = (props: Props) => {
           src="/vercel.svg"
           width={16}
           height={16}
-          alt="velog로고"
+          alt="로고"
         />
-        <span>두리님 블로그</span>
+        <span>{props.user?.nickname}님 블로그</span>
       </Link>
       <div className="flex items-center">
         <Link href="/notification" className="mr-2 p-2">

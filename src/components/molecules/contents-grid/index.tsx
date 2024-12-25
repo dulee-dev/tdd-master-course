@@ -1,8 +1,10 @@
 import clsx from 'clsx';
 import { ContentItem } from '../content-item';
+import { ContentView } from '@/domains/content/type';
 
 interface Props {
   className?: string;
+  contents: ContentView[];
 }
 
 export const ContentGrid = (props: Props) => {
@@ -13,8 +15,8 @@ export const ContentGrid = (props: Props) => {
         props.className
       )}
     >
-      {[...Array(12).keys()].map((c, i) => (
-        <ContentItem key={i} />
+      {props.contents.map((c, i) => (
+        <ContentItem key={i} content={c} />
       ))}
     </div>
   );

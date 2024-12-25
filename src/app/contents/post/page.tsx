@@ -11,8 +11,8 @@ export default async function ContentsPost() {
 
   return (
     <>
-      <Header user={userNickname ? { nickname: userNickname } : undefined} />
-      <ContentForm className="mb-20" />
+      <Header user={{ nickname: userNickname }} />
+      <ContentForm className="mb-20" user={{ nickname: userNickname }} />
       <Footer />
     </>
   );

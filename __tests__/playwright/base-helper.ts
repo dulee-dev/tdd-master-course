@@ -1,4 +1,4 @@
-import { BrowserContext, Locator, type Page } from '@playwright/test';
+import { BrowserContext, Locator, type Page, expect } from '@playwright/test';
 import path from 'path';
 
 export class BaseHelper {
@@ -22,7 +22,11 @@ export class BaseHelper {
     ]);
   }
 
-  async setInputFixtureFile(locator: Locator, fileName = 'file.svg') {
+  async setInputFixtureFile(locator: Locator, fileName = '/file.svg') {
     await locator.setInputFiles(path.join('__tests__', 'fixtures', fileName));
+  }
+
+  async assertStrictPage(path: string): Promise<void> {
+    await expect(this.page).toHaveURL(this.baseUrl + path);
   }
 }

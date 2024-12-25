@@ -1,25 +1,32 @@
+import { ContentView } from '@/domains/content/type';
+import { localizeDate } from '@/libs/string-sub/localized';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 
 interface Props {
   className?: string;
+  content: ContentView;
 }
 
 export const ContentItem = (props: Props) => {
   return (
-    <article className={clsx(props.className)}>
+    <article className={clsx(props.className)} data-testid={'content-item'}>
       <Link href="/">
-        <Image width={600} height={600} src="/window.svg" alt="thumb" />
+        <Image
+          width={600}
+          height={600}
+          src={props.content.thumbnail}
+          alt={props.content.title}
+        />
       </Link>
       <Link href="/">
-        <h2 className="text-2xl font-semibold mb-2 inline">title</h2>
+        <h2 className="text-2xl font-semibold mb-2 inline">
+          {props.content.title}
+        </h2>
       </Link>
       <Link href="/">
-        <div className="text-neutral-400 mb-4">
-          ldksjfal kdsjf;aldsj fa;lkdsj fa;lksdjf ;laksdjf a;slidf jasdlkf
-          ja;lsdkfj a;sldkf j;alsdk jfkla{' '}
-        </div>
+        <div className="text-neutral-400 mb-4">{props.content.body}</div>
       </Link>
       <div className="flex items-center justify-between">
         <div className="flex items-center">
@@ -27,12 +34,12 @@ export const ContentItem = (props: Props) => {
             className="mr-2"
             width={32}
             height={32}
-            src="/globe.svg"
-            alt="thumb"
+            src={'globe.svg'}
+            alt={props.content.author.nickname}
           />
-          <span>nickname</span>
+          <span>{props.content.author.nickname}</span>
         </div>
-        <div>3일 전</div>
+        <div>{localizeDate(props.content.createdAt)}</div>
       </div>
     </article>
   );

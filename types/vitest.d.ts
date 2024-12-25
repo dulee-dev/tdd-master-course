@@ -4,6 +4,7 @@ import 'vitest';
 
 interface CustomMatchers<R = unknown> {
   toBeUuid: () => R;
+  toBeArray: () => R;
 }
 
 declare module 'vitest' {

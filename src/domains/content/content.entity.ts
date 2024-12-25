@@ -3,4 +3,6 @@ export interface Content {
   title: string;
   body: string;
   thumbnail: string;
+  createdAt: Date;
+  authorId: string;
 }

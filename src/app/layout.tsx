@@ -24,10 +24,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const res = await fetch('http://localhost:4001/contents');
-  const data = await res.json();
-  console.log('in server-side ok', data);
-
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>

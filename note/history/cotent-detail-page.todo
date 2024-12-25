@@ -1,0 +1,37 @@
+ContentsDetailPage:
+  ☐ 전체 @started(24-12-24 21:23)
+  ☐ 요구사항 분석(문제 상황, 목표 등)
+    auth guard public
+    해당 content 없으면 /contents로 리다이렉트
+    main
+      init fetch
+        title, body, authorNickname
+      if(author === sign-in-user) show action btns
+      날짜 표시
+    authorAside
+      show nickname
+    
+    comment
+      not sign-in user click form -> redirect to sign-in
+
+  ☐ 개발 전략(테스트 시나리오, 우선순위 - 후순위로 미룰게 있나?, 작업 목록 작성)
+    순차적으로 개발
+
+
+  ☐ 작업 목록: @must @could @should @won't
+    ✔ guard @done(24-12-24 23:00)
+    ✔ 해당 content 없으면 /contents로 리다이렉트 @done(24-12-24 23:04)
+    ✔ main @done(24-12-24 23:27)
+      ✔ title, body, createdAt, authorNickname @done(24-12-24 23:27)
+      ✔ if author is sign-in user, show action btns @done(24-12-24 23:27)
+        ✔ if not, not @done(24-12-24 23:27)
+    ✔ author nickname @done(24-12-24 23:46)
+    ✔ comment form @done(24-12-24 23:46)
+      onClick form
+        not sign-in -> redirect to sign-in page
+        sign-in -> void;
+    ✔ 마무리 @done(24-12-24 23:47)
+
+  ☐ 회고
+
+  ☐ 추가

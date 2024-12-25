@@ -10,9 +10,11 @@ import { useTitleStatus } from './hooks/use-title-status';
 import { useFormStatus } from './hooks/use-form-status';
 import { useInputFile } from '@/hooks/use-input-file.hook';
 import { createContent } from './actions';
+import { localizeDate } from '@/libs/string-sub/localized';
 
 interface Props {
   className?: string;
+  user: { nickname: string };
 }
 
 export const ContentForm = (props: Props) => {
@@ -20,8 +22,13 @@ export const ContentForm = (props: Props) => {
   const { text: title, onInput: onInputTitle } = useContentEditable('');
   const titleStatus = useTitleStatus(title);
   const { text: body, onInput: onInputBody } = useContentEditable('');
-  const { filePath, onChange: onChangeFile } = useInputFile();
-  const formStatus = useFormStatus([titleStatus, typeof filePath === 'string']);
+  const {
+    filePath,
+    view,
+    idle,
+    onChange: onChangeFile,
+  } = useInputFile('/window.svg');
+  const formStatus = useFormStatus([titleStatus, filePath !== undefined, idle]);
   const onClick = async () => {
     if (!filePath) {
       alert('file not selected');
@@ -51,13 +58,15 @@ export const ContentForm = (props: Props) => {
           contentEditable
           suppressContentEditableWarning
           onInput={onInputTitle}
-        ></div>
+        >
+          {title}
+        </div>
         <div>
-          <span>{'두리'}</span>
+          <span>{props.user.nickname}</span>
           {` `}
           {middleDot}
           {` `}
-          <span>{'2024년 12월 12일'}</span>
+          <span>{localizeDate(new Date())}</span>
         </div>
       </header>
       <div
@@ -67,7 +76,7 @@ export const ContentForm = (props: Props) => {
         className="outline-none min-h-40"
         onInput={onInputBody}
       >
-        본문을 입력해주세요.
+        {body}
       </div>
       <hr className="my-12" />
       <div className="flex flex-col items-center">
@@ -81,7 +90,7 @@ export const ContentForm = (props: Props) => {
               width={600}
               height={600}
               alt={'thumbnail'}
-              src="/file.svg"
+              src={view}
               className="w-48 h-48"
             />
           </label>
@@ -92,7 +101,6 @@ export const ContentForm = (props: Props) => {
             className="hidden"
             onChange={onChangeFile}
           />
-          {filePath}
         </div>
       </div>
       <div className="mt-12">

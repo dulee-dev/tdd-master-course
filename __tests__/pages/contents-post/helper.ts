@@ -16,7 +16,9 @@ export class Helper extends BaseHelper {
     this.getBody = page.getByLabel('본문');
     this.getInputThumbnail = page.getByLabel('thumbnail');
     this.getThumbnail = page.getByAltText('thumbnail');
-    this.getSubmitBtn = page.getByRole('button', { name: '생성하기' });
+    this.getSubmitBtn = page.getByRole('button', {
+      name: '생성하기',
+    });
   }
 
   async gotoTargetPage() {

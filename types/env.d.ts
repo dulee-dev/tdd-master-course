@@ -6,6 +6,6 @@ declare namespace NodeJS {
     // PORT: string; // 포트 번호
     NEXT_PUBLIC_API_BASE_URL: string;
     NEXT_PUBLIC_WEB_BASE_URL: string;
-    MOCK?: 'true' | 'false';
+    NEXT_PUBLIC_MOCK?: 'true' | 'false';
   }
 }

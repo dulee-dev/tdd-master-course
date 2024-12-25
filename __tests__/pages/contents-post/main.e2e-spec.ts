@@ -3,6 +3,11 @@ import { authTest } from '@__tests__/playwright/auth-test';
 import { faker } from '@faker-js/faker';
 import { uuidRegConcat } from '@/libs/string-sub';
 import { test, expect } from '@playwright/test';
+import { userFixtures } from '@__tests__/fixtures/users';
+import { mockInNode } from '@__tests__/mock-api/mock-in-node';
+import { http, HttpResponse } from 'msw';
+import { contentFixtures } from '@__tests__/fixtures/contents';
+import { convertContentToContentView } from '@__tests__/libs/convert';
 
 const url = '/contents/post';
 
@@ -11,9 +16,10 @@ test.describe('auth', () => {
 });
 
 test.describe('content-post-main', () => {
-  test.beforeEach(async ({ page, context }) => {
+  test('', async ({ page, context }) => {
     const helper = new Helper(page, context);
-    await helper.signIn('dulee');
+    const user = userFixtures[0];
+    await helper.signIn(user.nickname);
     await helper.gotoTargetPage();
   });
 
@@ -43,16 +49,21 @@ test.describe('content-post-main', () => {
 
   test('if image choosed, show', async ({ page, context }) => {
     const helper = new Helper(page, context);
+    const fileName = '/file.svg';
 
-    await helper.setInputFixtureFile(helper.getInputThumbnail);
-    await expect(page.getByText('file.svg')).toBeVisible();
+    await helper.setInputFixtureFile(helper.getInputThumbnail, fileName);
+    await expect(helper.getThumbnail).toHaveAttribute('src', fileName);
   });
 
   test('if ok, show', async ({ page, context }) => {
-    const helper = new Helper(page, context);
+    const title = faker.string.sample(2);
 
-    await helper.getTitle.fill(faker.string.sample(2));
-    await helper.setInputFixtureFile(helper.getInputThumbnail);
+    const helper = new Helper(page, context);
+    const fileName = '/file.svg';
+
+    await helper.getTitle.fill(title);
+    await helper.setInputFixtureFile(helper.getInputThumbnail, fileName);
+    await expect(helper.getThumbnail).toHaveAttribute('src', fileName);
 
     // disabled면 클릭 안함
     await helper.getSubmitBtn.click();
@@ -62,5 +73,6 @@ test.describe('content-post-main', () => {
       'i'
     );
     await expect(page).toHaveURL(regexp);
+    await expect(page.getByText(title)).toBeVisible();
   });
 });
