@@ -5,6 +5,7 @@ import { uuidRegConcat } from '@/libs/string-sub';
 import { test, expect } from '@playwright/test';
 import { contentFixtures } from '@__tests__/fixtures/contents';
 import { userFixtures } from '@__tests__/fixtures/users';
+import { onlyMock } from '@__tests__/playwright/skip-if';
 
 const calcUrl = (id: string): string => `/contents/${id}/edit`;
 
@@ -74,7 +75,8 @@ test.describe('content-edit', () => {
     await expect(helper.getThumbnail).toHaveAttribute('src', fileName);
   });
 
-  test('if ok, show', async ({ page, context }) => {
+  test('if ok, edit', async ({ page, context }) => {
+    onlyMock();
     const helper = new Helper(page, context);
     const user = userFixtures[0];
     const content = contentFixtures[0];

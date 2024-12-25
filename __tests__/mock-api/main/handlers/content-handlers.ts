@@ -57,7 +57,7 @@ export const contentHandlers = [
       const auth = request.headers.get('authorization');
       if (auth !== author.nickname)
         return HttpResponse.json({
-          status: 401,
+          status: 404,
         });
 
       return HttpResponse.json({
@@ -106,7 +106,10 @@ export const contentHandlers = [
           status: 401,
         });
 
-      const prototype = (await request.json()) as Omit<Content, 'id'>;
+      const prototype = (await request.json()) as Omit<
+        Content,
+        'id' | 'createdAt' | 'authorId'
+      >;
 
       return HttpResponse.json({
         content: {

@@ -10,13 +10,16 @@ interface Props {
 }
 
 export const ContentItem = (props: Props) => {
+  console.log(props.content.thumbnail);
+
   return (
     <article className={clsx(props.className)} data-testid={'content-item'}>
       <Link href="/">
         <Image
           width={600}
           height={600}
-          src={props.content.thumbnail}
+          src={'/file.svg'}
+          // src={props.content.thumbnail}
           alt={props.content.title}
         />
       </Link>

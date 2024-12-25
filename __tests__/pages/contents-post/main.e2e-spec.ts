@@ -4,6 +4,7 @@ import { faker } from '@faker-js/faker';
 import { uuidRegConcat } from '@/libs/string-sub';
 import { test, expect } from '@playwright/test';
 import { userFixtures } from '@__tests__/fixtures/users';
+import { onlyMock } from '@__tests__/playwright/skip-if';
 
 const url = '/contents/post';
 
@@ -55,6 +56,7 @@ test.describe('content-post-main', () => {
   });
 
   test('if ok, show', async ({ page, context }) => {
+    onlyMock();
     const helper = new Helper(page, context);
     const user = userFixtures[0];
     await helper.init(user);

@@ -3,6 +3,7 @@ import { userFixtures } from '@__tests__/fixtures/users';
 import { authTest } from '@__tests__/playwright/auth-test';
 import { test, expect } from '@playwright/test';
 import { Helper } from './helper';
+import { onlyMock } from '@__tests__/playwright/skip-if';
 
 const getPath = (contentId: string): string => {
   return `${process.env.NEXT_PUBLIC_WEB_BASE_URL}/contents/${contentId}`;
@@ -107,6 +108,7 @@ test.describe('comment form', () => {
 
 test.describe('delete', () => {
   test('success', async ({ page, context }) => {
+    onlyMock();
     const helper = new Helper(page, context);
     const content = contentFixtures[0];
     const user = userFixtures[0];

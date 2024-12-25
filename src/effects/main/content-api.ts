@@ -64,7 +64,7 @@ export const contentApi = {
     const res = await fetch(
       process.env.NEXT_PUBLIC_API_BASE_URL + '/contents',
       {
-        method: 'post',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           authorization,
@@ -84,7 +84,7 @@ export const contentApi = {
     const res = await fetch(
       process.env.NEXT_PUBLIC_API_BASE_URL + '/contents/' + id,
       {
-        method: 'patch',
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           authorization,
@@ -103,7 +103,7 @@ export const contentApi = {
     const res = await fetch(
       process.env.NEXT_PUBLIC_API_BASE_URL + '/contents/' + id,
       {
-        method: 'delete',
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
           authorization,
