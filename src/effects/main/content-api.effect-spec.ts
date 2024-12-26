@@ -15,7 +15,6 @@ describe('content-api', () => {
     });
 
     expect(data).toHaveProperty('contents.length', 12);
-    // expect(data).toHaveProperty('contents.length', 1);
     expect(data.status).toEqual(200);
   });
 

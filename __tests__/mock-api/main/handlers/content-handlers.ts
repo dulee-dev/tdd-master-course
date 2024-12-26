@@ -97,11 +97,14 @@ export const contentHandlers = [
     }
   ),
 
+  /**
+   * only user[0] is authorized
+   */
   http.post(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/contents`,
     async ({ request }) => {
       const auth = request.headers.get('authorization');
-      if (!auth)
+      if (auth !== userFixtures[0].nickname)
         return HttpResponse.json({
           status: 401,
         });

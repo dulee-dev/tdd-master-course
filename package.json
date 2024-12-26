@@ -1,23 +1,25 @@
 {
   "name": "teacher",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "PORT=3001 next dev",
+    "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "server": "npx server",
     "pw.debug": "npx playwright test --debug --workers=1"
   },
   "dependencies": {
+    "@dulee.dev/tdd-masterclass-api": "^1.2.0",
     "@faker-js/faker": "^9.3.0",
     "chalk": "^5.4.1",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "json-server": "^1.0.0-beta.3",
+    "json-date-parser": "^1.0.1",
     "msw": "^2.7.0",
     "next": "15.1.2",
     "query-string": "^9.1.1",

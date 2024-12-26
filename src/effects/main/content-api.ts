@@ -1,6 +1,8 @@
 import { Content } from '@/domains/content/content.entity';
 import { ContentView } from '@/domains/content/type';
+import superjson from 'superjson';
 import queryString from 'query-string';
+import { jsonDateParser } from 'json-date-parser';
 
 export const contentApi = {
   async findAll(query: {
@@ -14,7 +16,8 @@ export const contentApi = {
         '/contents?' +
         queryString.stringify(query)
     );
-    const json = await res.json();
+    const text = await res.text();
+    const json = JSON.parse(text, jsonDateParser);
     return json;
   },
 
@@ -24,7 +27,8 @@ export const contentApi = {
     const res = await fetch(
       process.env.NEXT_PUBLIC_API_BASE_URL + '/contents/' + id
     );
-    const json = await res.json();
+    const text = await res.text();
+    const json = JSON.parse(text, jsonDateParser);
     return json;
   },
 
@@ -42,7 +46,8 @@ export const contentApi = {
         },
       }
     );
-    const json = await res.json();
+    const text = await res.text();
+    const json = JSON.parse(text, jsonDateParser);
     return json;
   },
 
@@ -53,7 +58,8 @@ export const contentApi = {
       path += '?' + queryString.stringify({ q });
     }
     const res = await fetch(path);
-    const json = await res.json();
+    const text = await res.text();
+    const json = JSON.parse(text, jsonDateParser);
     return json;
   },
 
@@ -72,7 +78,8 @@ export const contentApi = {
         body: JSON.stringify(body),
       }
     );
-    const json = await res.json();
+    const text = await res.text();
+    const json = JSON.parse(text, jsonDateParser);
     return json;
   },
 
@@ -92,7 +99,8 @@ export const contentApi = {
         body: JSON.stringify(body),
       }
     );
-    const json = await res.json();
+    const text = await res.text();
+    const json = JSON.parse(text, jsonDateParser);
     return json;
   },
 
@@ -110,7 +118,8 @@ export const contentApi = {
         },
       }
     );
-    const json = await res.json();
+    const text = await res.text();
+    const json = JSON.parse(text, jsonDateParser);
     return json;
   },
 };
